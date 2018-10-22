@@ -30,7 +30,7 @@ public class UserTest {
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void 참여하는_사람의_이름이_null인_경우(){
-		final String name = "";
+		final String name = null;
 		new User(name);
 	}
 }
