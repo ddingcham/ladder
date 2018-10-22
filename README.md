@@ -21,3 +21,7 @@
 * 규칙 7: 3개 이상의 인스턴스 변수를 가진 클래스를 쓰지 않는다.
 * 규칙 8: 일급 콜렉션을 쓴다.
 * 규칙 9: 게터/세터/프로퍼티를 쓰지 않는다.
+
+### 알리바바 자바 가이드를 따른다.
+
+* https://github.com/ddingcham/Alibaba-Java-Coding-Guidelines
