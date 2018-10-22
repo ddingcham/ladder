@@ -1,6 +1,8 @@
-package com.ddingcham.ladder;
+package com.ddingcham.ladder.model;
 
 import org.junit.Test;
+
+import com.ddingcham.ladder.model.PlayerName;
 
 public class PlayerNameTest {
 	

@@ -1,4 +1,4 @@
-package com.ddingcham.ladder;
+package com.ddingcham.ladder.model;
 
 public class PlayerName {
 	private static final int MAX_NAME_LENGTH = 5;
