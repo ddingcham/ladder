@@ -1,3 +1,4 @@
+package com.ddingcham.ladder;
 import org.junit.Assert;
 import org.junit.Test;
 
