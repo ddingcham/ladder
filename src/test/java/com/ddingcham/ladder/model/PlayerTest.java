@@ -7,14 +7,14 @@ public class PlayerTest {
 
 	@Test
 	public void 사람_이름은_쉼표를_기준으로_구분한다(){
-		final Player[] expectedNames = new Player[]{
-				new Player(""),
-				new Player(""),
-				new Player(""),
-				new Player(""),
-				new Player("")};
+		final Player[] expectedPlayers = new Player[]{
+				new Player("이"),
+				new Player("름"),
+				new Player("다"),
+				new Player("섯"),
+				new Player("명")};
 		final String testTarget = new String("이,름,다,섯,명");
 		
-		Assert.assertArrayEquals(expectedNames, Player.generatePlayer(testTarget));
+		Assert.assertArrayEquals(expectedPlayers, Player.generatePlayer(testTarget));
 	}
 }
