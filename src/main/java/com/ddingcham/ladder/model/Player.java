@@ -3,18 +3,26 @@ package com.ddingcham.ladder.model;
 import java.util.Arrays;
 
 public class Player {
-	
+	static final String PLAYER_DELIMETER = ",";
 	private PlayerName name;
 	
 	public Player(String name){
 		this.name = new PlayerName(name);
 	}
 
-	public static Player[] generatePlayer(String names) {
+	public static Player[] generatePlayers(String playerNames) {
 		// TODO Auto-generated method stub
-		return Arrays.stream(names.split(","))
+		return Arrays.stream(splitPlayerNames(playerNames))
 				.map(name -> new Player(name))
 				.toArray(size -> new Player[size]);
+	}
+	
+	private static String[] splitPlayerNames(String playerNames){
+		String[] result = playerNames.split(PLAYER_DELIMETER);
+		if(result.length == 0){
+			throw new IllegalArgumentException("참여하는 사람의 이름 양식이 올바르지 않습니다.");
+		}
+		return result;
 	}
 
 	@Override
@@ -41,7 +49,10 @@ public class Player {
 			return false;
 		return true;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Player [name=" + name + "]";
+	}
 	
 }

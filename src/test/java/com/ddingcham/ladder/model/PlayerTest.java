@@ -1,9 +1,15 @@
 package com.ddingcham.ladder.model;
 
+import java.util.Arrays;
+
 import org.junit.Assert;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PlayerTest {
+	
+	private static Logger logger = LoggerFactory.getLogger(PlayerTest.class);
 
 	@Test
 	public void 사람_이름은_쉼표를_기준으로_구분한다_다섯명(){
@@ -15,7 +21,7 @@ public class PlayerTest {
 				new Player("명")};
 		final String testTarget = new String("이,름,다,섯,명");
 		
-		Assert.assertArrayEquals(expectedPlayers, Player.generatePlayer(testTarget));
+		Assert.assertArrayEquals(expectedPlayers, Player.generatePlayers(testTarget));
 	}
 	
 	@Test
@@ -25,24 +31,24 @@ public class PlayerTest {
 		};
 		final String testTarget = new String("이름");
 		
-		Assert.assertArrayEquals(expectedPlayers, Player.generatePlayer(testTarget));
+		Assert.assertArrayEquals(expectedPlayers, Player.generatePlayers(testTarget));
 	}
 	
 	@Test(expected = NullPointerException.class)
 	public void player를_생성하기_위한_입력이_null인_경우(){
 		final String playerNames = null;
-		Player.generatePlayer(playerNames);
+		Player.generatePlayers(playerNames);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void 유효한_사람_이름이_없는_경우_쉼표는_있을_때(){
 		final String playerNames = new String(",,,");
-		Player.generatePlayer(playerNames);
+		logger.debug(Arrays.toString(Player.generatePlayers(playerNames)));
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void 유요한_사람_이름이_없는_경우_빈_문자열(){
+	public void 유효한_사람_이름이_없는_경우_빈_문자열(){
 		final String playerNames = new String("");
-		Player.generatePlayer(playerNames);
+		Player.generatePlayers(playerNames);
 	}
 }

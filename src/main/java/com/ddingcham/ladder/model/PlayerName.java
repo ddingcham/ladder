@@ -35,6 +35,12 @@ public class PlayerName {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "PlayerName [name=" + name + "]";
+	}
+	
 	
 	
 }
