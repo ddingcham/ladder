@@ -27,4 +27,22 @@ public class PlayerTest {
 		
 		Assert.assertArrayEquals(expectedPlayers, Player.generatePlayer(testTarget));
 	}
+	
+	@Test(expected = NullPointerException.class)
+	public void player를_생성하기_위한_입력이_null인_경우(){
+		final String playerNames = null;
+		Player.generatePlayer(playerNames);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void 유효한_사람_이름이_없는_경우_쉼표는_있을_때(){
+		final String playerNames = new String(",,,");
+		Player.generatePlayer(playerNames);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void 유요한_사람_이름이_없는_경우_빈_문자열(){
+		final String playerNames = new String("");
+		Player.generatePlayer(playerNames);
+	}
 }
