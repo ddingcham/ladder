@@ -2,8 +2,6 @@ package com.ddingcham.ladder.model;
 
 import org.junit.Test;
 
-import com.ddingcham.ladder.model.PlayerName;
-
 public class PlayerNameTest {
 	
 	private static final String MAX_LENGTH_PLAYER_NAME = "다섯글자명";
@@ -27,9 +25,10 @@ public class PlayerNameTest {
 		new PlayerName(name);
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected=NullPointerException.class)
 	public void 참여하는_사람의_이름이_null인_경우(){
 		final String name = null;
 		new PlayerName(name);
 	}
+	
 }
