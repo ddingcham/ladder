@@ -1,16 +1,10 @@
 package com.ddingcham.ladder.model;
 
-import java.util.Arrays;
-
 import org.junit.Assert;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class PlayerTest {
 	
-	private static Logger logger = LoggerFactory.getLogger(PlayerTest.class);
-
 	@Test
 	public void 사람_이름은_쉼표를_기준으로_구분한다_다섯명(){
 		final Player[] expectedPlayers = new Player[]{
@@ -43,7 +37,7 @@ public class PlayerTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void 유효한_사람_이름이_없는_경우_쉼표는_있을_때(){
 		final String playerNames = new String(",,,");
-		logger.debug(Arrays.toString(Player.generatePlayers(playerNames)));
+		Player.generatePlayers(playerNames);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
