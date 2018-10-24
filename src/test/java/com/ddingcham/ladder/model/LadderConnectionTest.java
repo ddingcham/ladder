@@ -1,18 +1,19 @@
 package com.ddingcham.ladder.model;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 
 public class LadderConnectionTest {
 	
-	private static final Logger log = LoggerFactory.getLogger(LadderConnectionTest.class);
-
 	@Test
 	public void 사다리_연결선_생성(){
-		final int numOfLadderConnection = 5;
-		log.debug("new LadderConnection({}) : {}", numOfLadderConnection, new LadderConnection(numOfLadderConnection));
+		final int size = 500;
+		
+		LadderConnection preConnection = LadderConnection.unConnected();
+		for(LadderConnection connection : LadderConnection.generate(size)){
+			Assertions.assertThat(connection.isConnected() && connection.equals(preConnection)).isFalse();
+			preConnection = connection;
+		}
 	}
 	
 }
