@@ -13,22 +13,20 @@ public class LadderPosition {
 		this.position = position;
 	}
 
-	public LadderPosition moveLeft() {
+	public void moveLeft() {
 		// TODO Auto-generated method stub
 		if(this.position == 1) {
 			throw new RuntimeException();
 		}
 		this.position--;
-		return this;
 	}
 
-	public LadderPosition moveRight() {
+	public void moveRight() {
 		// TODO Auto-generated method stub
 		if(this.position == Integer.MAX_VALUE) {
 			throw new RuntimeException();
 		}
 		this.position++;
-		return this;
 	}
 
 	@Override
@@ -55,6 +53,16 @@ public class LadderPosition {
 			return false;
 		}
 		return true;
+	}
+
+	public int toInt() {
+		// TODO Auto-generated method stub
+		return position;
+	}
+
+	@Override
+	public String toString() {
+		return "LadderPosition [position=" + position + "]";
 	}
 	
 	

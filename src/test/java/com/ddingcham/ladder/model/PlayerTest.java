@@ -5,14 +5,16 @@ import org.junit.Test;
 
 public class PlayerTest {
 	
+	private static final int DEFAULT_LADDER_POSITION = 1;
+	
 	@Test
 	public void 사람_이름은_쉼표를_기준으로_구분한다_다섯명(){
 		final Player[] expectedPlayers = new Player[]{
-				new Player("이"),
-				new Player("름"),
-				new Player("다"),
-				new Player("섯"),
-				new Player("명")};
+				new Player("이", DEFAULT_LADDER_POSITION),
+				new Player("름", DEFAULT_LADDER_POSITION),
+				new Player("다", DEFAULT_LADDER_POSITION),
+				new Player("섯", DEFAULT_LADDER_POSITION),
+				new Player("명", DEFAULT_LADDER_POSITION)};
 		final String testTarget = new String("이,름,다,섯,명");
 		
 		Assert.assertArrayEquals(expectedPlayers, Player.generatePlayers(testTarget));
@@ -21,7 +23,7 @@ public class PlayerTest {
 	@Test
 	public void 사람_이름은_쉼표를_기준으로_구분한다_한_명_이라_쉼표가_없는_경우(){
 		final Player[] expectedPlayers = new Player[]{
-				new Player("이름")
+				new Player("이름", DEFAULT_LADDER_POSITION)
 		};
 		final String testTarget = new String("이름");
 		

@@ -37,26 +37,30 @@ public class LadderMoveContext {
 		return ladderConnections.get(ladderConnections.size()-1);
 	}
 
-	public boolean isMovable(int index) {
+	public boolean isMovable(LadderPosition position) {
 		// TODO Auto-generated method stub
-		if(isMovableToLeft(index) || isMovableToRight(index)){
+		if(isMovableToLeft(position) || isMovableToRight(position)){
 			return true;
 		}
 		return false;
 	}
 	
-	private boolean isMovableToLeft(int index){
-		return index > 0 && ladderConnections.get(index-1).isConnected();
+	private boolean isMovableToLeft(LadderPosition position){
+		return position.toInt() > 1 && ladderConnections.get(position.toInt()-2).isConnected();
 	}
 	
-	private boolean isMovableToRight(int index){
-		return index < ladderConnections.size()-1 && ladderConnections.get(index).isConnected();
+	private boolean isMovableToRight(LadderPosition position){
+		return position.toInt() <= ladderConnections.size() && ladderConnections.get(position.toInt()-1).isConnected();
 	}
 
-	public boolean direction(int index) {
+	public boolean direction(LadderPosition position) {
 		// TODO Auto-generated method stub
-		if(isMovableToLeft(index)) return LadderContext.LEFT; 
-		if(isMovableToRight(index)) return LadderContext.RIGHT;
+		if(isMovableToLeft(position)){
+			return LadderContext.LEFT; 
+		}
+		if(isMovableToRight(position)){
+			return LadderContext.RIGHT;
+		}
 		return false;
 	}
 	

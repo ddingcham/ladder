@@ -1,20 +1,23 @@
 package com.ddingcham.ladder.model;
 
-import java.util.Arrays;
-
 public class Player {
 	static final String PLAYER_DELIMETER = ",";
 	private PlayerName name;
+	private LadderPosition position;
 	
-	public Player(String name){
+	public Player(String name, int position){
 		this.name = new PlayerName(name);
+		this.position = new LadderPosition(position);
 	}
-
+	
 	public static Player[] generatePlayers(String playerNames) {
 		// TODO Auto-generated method stub
-		return Arrays.stream(splitPlayerNames(playerNames))
-				.map(name -> new Player(name))
-				.toArray(size -> new Player[size]);
+		String[] splitedNames = splitPlayerNames(playerNames);
+		Player[] players = new Player[splitedNames.length];
+		for(int i=0;i<splitedNames.length;i++){
+			players[i] = new Player(splitedNames[i], i+1);
+		}
+		return players;
 	}
 	
 	private static String[] splitPlayerNames(String playerNames){
@@ -55,9 +58,33 @@ public class Player {
 		return true;
 	}
 
+	
+
 	@Override
 	public String toString() {
-		return "Player [name=" + name + "]";
+		return "Player [name=" + name + ", position=" + position + "]";
 	}
-	
+
+	public void moveRight() {
+		// TODO Auto-generated method stub
+		position.moveRight();
+	}
+
+	public void moveLeft() {
+		// TODO Auto-generated method stub
+		position.moveLeft();
+	}
+
+	public void move(LadderMoveContext context) {
+		// TODO Auto-generated method stub
+		if(!context.isMovable(position)){
+			return;
+		}
+		if(context.direction(position)){
+			position.moveRight();
+		}
+		else{
+			position.moveLeft();
+		}
+	}
 }

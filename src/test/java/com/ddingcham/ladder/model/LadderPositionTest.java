@@ -14,17 +14,24 @@ public class LadderPositionTest {
 	@Test
 	public void 왼쪽으로_이동(){
 		LadderPosition expected = new LadderPosition(1);
-		Assertions.assertThat(new LadderPosition(2).moveLeft()).isEqualTo(expected);
+		LadderPosition actual = new LadderPosition(2);
+		actual.moveLeft();
+		
+		Assertions.assertThat(actual).isEqualTo(expected);
 	}
 	
 	@Test(expected = RuntimeException.class)
 	public void 왼쪽으로_이동_한계점(){
-		Assertions.assertThat(new LadderPosition(1).moveLeft());
+		LadderPosition actual = new LadderPosition(1);
+		actual.moveLeft();
 	}
 	
 	@Test
 	public void 오른쪽으로_이동(){
 		LadderPosition expected = new LadderPosition(2);
-		Assertions.assertThat(new LadderPosition(1).moveRight()).isEqualTo(expected);
+		LadderPosition actual = new LadderPosition(1);
+		actual.moveRight();
+		
+		Assertions.assertThat(actual).isEqualTo(expected);
 	}
 }

@@ -46,10 +46,10 @@ public class LadderMoveContextTest {
 	public void 움직여야_할_경우_판별(){
 		SoftAssertions softly = new SoftAssertions();
 		
-		softly.assertThat(context.isMovable(0)).isTrue();
-		softly.assertThat(context.isMovable(1)).isTrue();
-		softly.assertThat(context.isMovable(2)).isFalse();
-		softly.assertThat(context.isMovable(3)).isFalse();
+		softly.assertThat(context.isMovable(new LadderPosition(1))).isTrue();
+		softly.assertThat(context.isMovable(new LadderPosition(2))).isTrue();
+		softly.assertThat(context.isMovable(new LadderPosition(3))).isFalse();
+		softly.assertThat(context.isMovable(new LadderPosition(4))).isFalse();
 		
 		softly.assertAll();
 	}
@@ -58,8 +58,8 @@ public class LadderMoveContextTest {
 	public void 왼쪽_오른쪽_방향_판별(){
 		SoftAssertions softly = new SoftAssertions();
 		
-		softly.assertThat(context.direction(0)).isEqualTo(LadderContext.RIGHT);
-		softly.assertThat(context.direction(1)).isEqualTo(LadderContext.LEFT);
+		softly.assertThat(context.direction(new LadderPosition(1))).isEqualTo(LadderContext.RIGHT);
+		softly.assertThat(context.direction(new LadderPosition(2))).isEqualTo(LadderContext.LEFT);
 		
 		softly.assertAll();
 	}
