@@ -3,6 +3,7 @@ package com.ddingcham.ladder.model;
 
 public class LadderPosition {
 	
+	static final LadderPosition DEAFAULT_POSITION = new LadderPosition(1);
 	private int position;
 
 	public LadderPosition(int position) {

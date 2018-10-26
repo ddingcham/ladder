@@ -1,31 +1,17 @@
 package com.ddingcham.ladder.model;
 
 public class Player {
-	static final String PLAYER_DELIMETER = ",";
 	private PlayerName name;
 	private LadderPosition position;
 	
-	public Player(String name, int position){
+	public Player(String name) {
+		// TODO Auto-generated constructor stub
+		this(name, LadderPosition.DEAFAULT_POSITION);
+	}
+	
+	public Player(String name, LadderPosition position){
 		this.name = new PlayerName(name);
-		this.position = new LadderPosition(position);
-	}
-	
-	public static Player[] generatePlayers(String playerNames) {
-		// TODO Auto-generated method stub
-		String[] splitedNames = splitPlayerNames(playerNames);
-		Player[] players = new Player[splitedNames.length];
-		for(int i=0;i<splitedNames.length;i++){
-			players[i] = new Player(splitedNames[i], i+1);
-		}
-		return players;
-	}
-	
-	private static String[] splitPlayerNames(String playerNames){
-		String[] result = playerNames.split(PLAYER_DELIMETER);
-		if(result.length == 0){
-			throw new IllegalArgumentException("참여하는 사람의 이름 양식이 올바르지 않습니다.");
-		}
-		return result;
+		this.position = position;
 	}
 
 	@Override
@@ -75,16 +61,21 @@ public class Player {
 		position.moveLeft();
 	}
 
-	public void move(LadderMoveContext context) {
+	public void move(LadderRow ladderRow) {
 		// TODO Auto-generated method stub
-		if(!context.isMovable(position)){
+		if(!ladderRow.isMovable(position)){
 			return;
 		}
-		if(context.direction(position)){
+		if(ladderRow.direction(position)){
 			position.moveRight();
 		}
 		else{
 			position.moveLeft();
 		}
+	}
+
+	public int where() {
+		// TODO Auto-generated method stub
+		return this.position.toInt();
 	}
 }

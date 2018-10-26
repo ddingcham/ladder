@@ -4,11 +4,11 @@ import java.util.List;
 
 import com.ddingcham.ladder.model.constant.LadderContext;
 
-public class LadderMoveContext {
+public class LadderRow {
 
 	private List<LadderConnection> ladderConnections;
 	
-	public LadderMoveContext(int size){
+	public LadderRow(int size){
 		this.ladderConnections = LadderConnection.generate(size);
 	}
 

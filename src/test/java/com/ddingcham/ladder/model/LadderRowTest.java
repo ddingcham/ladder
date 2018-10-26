@@ -8,15 +8,16 @@ import org.junit.rules.TestName;
 
 import com.ddingcham.ladder.model.constant.LadderContext;
 
-public class LadderMoveContextTest {
+public class LadderRowTest {
 	
-	private LadderMoveContext context;
+	private LadderRow row;
+	
 	@Rule
 	public TestName testName = new TestName();
 	
 	/*
 	 * TODO
-	 * LadderMoveContext의 add 메소드 테스트용 아닌가?
+	 * LadderRow의 add 메소드 테스트용 아닌가?
 	 * 테스트 더블을 적용할까?
 	 */
 	@Before
@@ -24,17 +25,17 @@ public class LadderMoveContextTest {
 		if(testName.getMethodName().equals("가로_라인_중복_방지")){
 			return;
 		}
-		context = new LadderMoveContext(0);
-		context.add(LadderConnection.connected());
-		context.add(LadderConnection.unConnected());
-		context.add(LadderConnection.unConnected());
+		row = new LadderRow(0);
+		row.add(LadderConnection.connected());
+		row.add(LadderConnection.unConnected());
+		row.add(LadderConnection.unConnected());
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void 가로_라인_중복_방지(){
-		context = new LadderMoveContext(0);
-		context.add(LadderConnection.connected());
-		context.add(LadderConnection.connected());
+		row = new LadderRow(0);
+		row.add(LadderConnection.connected());
+		row.add(LadderConnection.connected());
 	}
 
 	/*
@@ -46,10 +47,10 @@ public class LadderMoveContextTest {
 	public void 움직여야_할_경우_판별(){
 		SoftAssertions softly = new SoftAssertions();
 		
-		softly.assertThat(context.isMovable(new LadderPosition(1))).isTrue();
-		softly.assertThat(context.isMovable(new LadderPosition(2))).isTrue();
-		softly.assertThat(context.isMovable(new LadderPosition(3))).isFalse();
-		softly.assertThat(context.isMovable(new LadderPosition(4))).isFalse();
+		softly.assertThat(row.isMovable(new LadderPosition(1))).isTrue();
+		softly.assertThat(row.isMovable(new LadderPosition(2))).isTrue();
+		softly.assertThat(row.isMovable(new LadderPosition(3))).isFalse();
+		softly.assertThat(row.isMovable(new LadderPosition(4))).isFalse();
 		
 		softly.assertAll();
 	}
@@ -58,8 +59,8 @@ public class LadderMoveContextTest {
 	public void 왼쪽_오른쪽_방향_판별(){
 		SoftAssertions softly = new SoftAssertions();
 		
-		softly.assertThat(context.direction(new LadderPosition(1))).isEqualTo(LadderContext.RIGHT);
-		softly.assertThat(context.direction(new LadderPosition(2))).isEqualTo(LadderContext.LEFT);
+		softly.assertThat(row.direction(new LadderPosition(1))).isEqualTo(LadderContext.RIGHT);
+		softly.assertThat(row.direction(new LadderPosition(2))).isEqualTo(LadderContext.LEFT);
 		
 		softly.assertAll();
 	}

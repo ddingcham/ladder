@@ -5,46 +5,39 @@ import org.junit.Test;
 
 public class PlayerTest {
 	
-	private static final int DEFAULT_LADDER_POSITION = 1;
-	
 	@Test
 	public void 사람_이름은_쉼표를_기준으로_구분한다_다섯명(){
-		final Player[] expectedPlayers = new Player[]{
-				new Player("이", DEFAULT_LADDER_POSITION),
-				new Player("름", DEFAULT_LADDER_POSITION),
-				new Player("다", DEFAULT_LADDER_POSITION),
-				new Player("섯", DEFAULT_LADDER_POSITION),
-				new Player("명", DEFAULT_LADDER_POSITION)};
-		final String testTarget = new String("이,름,다,섯,명");
+		final Players expectedPlayers = new Players();
+		expectedPlayers.addPlayer("이");
+		expectedPlayers.addPlayer("름");
+		expectedPlayers.addPlayer("다");
+		expectedPlayers.addPlayer("섯");
+		expectedPlayers.addPlayer("명");
 		
-		Assert.assertArrayEquals(expectedPlayers, Player.generatePlayers(testTarget));
+		Assert.assertEquals(expectedPlayers, new Players("이,름,다,섯,명"));
 	}
 	
 	@Test
 	public void 사람_이름은_쉼표를_기준으로_구분한다_한_명_이라_쉼표가_없는_경우(){
-		final Player[] expectedPlayers = new Player[]{
-				new Player("이름", DEFAULT_LADDER_POSITION)
-		};
-		final String testTarget = new String("이름");
+		final Players expectedPlayers = new Players();
+		expectedPlayers.addPlayer("이름");
 		
-		Assert.assertArrayEquals(expectedPlayers, Player.generatePlayers(testTarget));
-	}
-	
-	@Test(expected = NullPointerException.class)
-	public void player를_생성하기_위한_입력이_null인_경우(){
-		final String playerNames = null;
-		Player.generatePlayers(playerNames);
+		Assert.assertEquals(expectedPlayers, new Players("이름"));
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void 유효한_사람_이름이_없는_경우_쉼표는_있을_때(){
-		final String playerNames = new String(",,,");
-		Player.generatePlayers(playerNames);
+		new Players(",,,");
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void 유효한_사람_이름이_없는_경우_빈_문자열(){
-		final String playerNames = new String("");
-		Player.generatePlayers(playerNames);
+		new Players("");
 	}
+	
+	// 사실 테스트 대상은 아니었음
+	@Test(expected = NullPointerException.class)
+	public void player를_생성하기_위한_입력이_null인_경우(){
+		new Players(null);
+	}	
 }
