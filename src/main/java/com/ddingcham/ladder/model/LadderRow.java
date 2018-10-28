@@ -1,38 +1,60 @@
+
 package com.ddingcham.ladder.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ddingcham.ladder.model.constant.LadderContext;
 
 public class LadderRow {
 
-	private List<LadderConnection> ladderConnections;
+	public static final Boolean UNCONNECTED_CONNECTION = Boolean.FALSE;
+	public static final Boolean CONNECTED_CONNECTION = Boolean.TRUE;
+	private List<Boolean> ladderConnections;
 	
 	public LadderRow(int size){
-		this.ladderConnections = LadderConnection.generate(size);
+		this.ladderConnections = generate(size);
 	}
-
-	@Override
-	public String toString() {
-		return "LadderMoveContext [ladderConnections=" + ladderConnections
-				+ "]";
-	}
-
-	public void add(LadderConnection ladderConnection) {
+	
+	private List<Boolean> generate(int size) {
 		// TODO Auto-generated method stub
-		if(lastConnected() && ladderConnection.isConnected()){
+		List<Boolean> connections = new ArrayList<Boolean>();
+		Boolean preConnection = UNCONNECTED_CONNECTION;
+		
+		for(int i=0;i<size;i++){
+			preConnection = next(preConnection);
+			connections.add(preConnection);
+		}
+		return connections;
+	}
+
+	private Boolean generateRandomConnection(){
+		return Math.random() < 0.5;
+	}
+	
+	private Boolean next(Boolean preConnection){
+		if(preConnection){
+			return UNCONNECTED_CONNECTION;
+		}else{
+			return generateRandomConnection();
+		}
+	}
+
+	public void add(Boolean connected) {
+		// TODO Auto-generated method stub
+		if(lastConnected() && connected){
 			throw new IllegalArgumentException();
 		}
-		ladderConnections.add(ladderConnection);
+		ladderConnections.add(connected);
 	}
 	
-	private boolean lastConnected(){
-		return getLast().isConnected();
+	private Boolean lastConnected(){
+		return getLast();
 	}
 	
-	private LadderConnection getLast(){
+	private Boolean getLast(){
 		if(ladderConnections.isEmpty()){
-			return LadderConnection.unConnected();
+			return UNCONNECTED_CONNECTION;
 		}
 		return ladderConnections.get(ladderConnections.size()-1);
 	}
@@ -46,11 +68,13 @@ public class LadderRow {
 	}
 	
 	private boolean isMovableToLeft(LadderPosition position){
-		return position.toInt() > 1 && ladderConnections.get(position.toInt()-2).isConnected();
+		int intPosition = position.toInt();
+		return intPosition > 1 && ladderConnections.get(intPosition-2);
 	}
 	
 	private boolean isMovableToRight(LadderPosition position){
-		return position.toInt() <= ladderConnections.size() && ladderConnections.get(position.toInt()-1).isConnected();
+		int intPosition = position.toInt();
+		return intPosition <= ladderConnections.size() && ladderConnections.get(intPosition-1);
 	}
 
 	public boolean direction(LadderPosition position) {
@@ -58,10 +82,7 @@ public class LadderRow {
 		if(isMovableToLeft(position)){
 			return LadderContext.LEFT; 
 		}
-		if(isMovableToRight(position)){
-			return LadderContext.RIGHT;
-		}
-		return false;
+		return LadderContext.RIGHT;
 	}
 	
 }

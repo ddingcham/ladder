@@ -6,14 +6,11 @@ import java.util.List;
 
 public class Players {
 	
-	private List<Player> players;
+	private List<Player> players = new ArrayList<Player>();
 	
-	public Players(){
-		this("");
-	}
+	public Players(){}
 
 	public Players(String playerNames){
-		players = new ArrayList<Player>();
 		initializePlayers(playerNames);
 	}
 	
@@ -53,29 +50,36 @@ public class Players {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj){
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Players other = (Players) obj;
 		if (players == null) {
-			if (other.players != null)
+			if (other.players != null) {
 				return false;
-		} else if (!players.equals(other.players))
+			}
+		} else if (!players.equals(other.players)) {
 			return false;
+		}
 		return true;
 	}
 
-	public int getPosition(String playerName) {
+	public int getPosition(PlayerName playerName) {
 		// TODO Auto-generated method stub
-		return players.get(calculateIndexByName(playerName)).where();
+		return players.get(calculateIndexByPlayerName(playerName)).where();
 	}
 	
-	private int calculateIndexByName(String playerName){
-		int index = players.indexOf(new Player(playerName));
-		if(index < 0) throw new IllegalArgumentException("없는 사람입니다.");
+	private int calculateIndexByPlayerName(PlayerName playerName){
+		int index = players.indexOf(playerName);
+		if(index < 0){
+			throw new IllegalArgumentException("없는 사람입니다.");
+		}
 		return index;
 	}
 	

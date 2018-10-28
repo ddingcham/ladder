@@ -26,16 +26,16 @@ public class LadderRowTest {
 			return;
 		}
 		row = new LadderRow(0);
-		row.add(LadderConnection.connected());
-		row.add(LadderConnection.unConnected());
-		row.add(LadderConnection.unConnected());
+		row.add(LadderRow.CONNECTED_CONNECTION);
+		row.add(LadderRow.UNCONNECTED_CONNECTION);
+		row.add(LadderRow.UNCONNECTED_CONNECTION);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void 가로_라인_중복_방지(){
 		row = new LadderRow(0);
-		row.add(LadderConnection.connected());
-		row.add(LadderConnection.connected());
+		row.add(LadderRow.CONNECTED_CONNECTION);
+		row.add(LadderRow.CONNECTED_CONNECTION);
 	}
 
 	/*
