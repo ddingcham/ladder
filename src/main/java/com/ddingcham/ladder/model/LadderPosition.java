@@ -3,7 +3,7 @@ package com.ddingcham.ladder.model;
 
 public class LadderPosition {
 	
-	static final LadderPosition DEAFAULT_POSITION = new LadderPosition(1);
+	static final LadderPosition MIN = new LadderPosition(1);
 	private int position;
 
 	public LadderPosition(int position) {
@@ -64,6 +64,11 @@ public class LadderPosition {
 	@Override
 	public String toString() {
 		return "LadderPosition [position=" + position + "]";
+	}
+
+	public boolean isLeft(LadderPosition ladderPosition) {
+		// TODO Auto-generated method stub
+		return this.position < ladderPosition.position;
 	}
 	
 	

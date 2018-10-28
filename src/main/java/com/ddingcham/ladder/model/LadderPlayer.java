@@ -1,15 +1,15 @@
 package com.ddingcham.ladder.model;
 
-public class Player {
+public class LadderPlayer {
 	private PlayerName name;
 	private LadderPosition position;
 	
-	public Player(String name) {
+	public LadderPlayer(String name) {
 		// TODO Auto-generated constructor stub
-		this(name, LadderPosition.DEAFAULT_POSITION);
+		this(name, LadderPosition.MIN);
 	}
 	
-	public Player(String name, LadderPosition position){
+	public LadderPlayer(String name, LadderPosition position){
 		this.name = new PlayerName(name);
 		this.position = position;
 	}
@@ -33,7 +33,7 @@ public class Player {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		Player other = (Player) obj;
+		LadderPlayer other = (LadderPlayer) obj;
 		if (name == null) {
 			if (other.name != null) {
 				return false;
@@ -74,8 +74,8 @@ public class Player {
 		}
 	}
 
-	public int where() {
+	public LadderPosition where() {
 		// TODO Auto-generated method stub
-		return this.position.toInt();
+		return position;
 	}
 }

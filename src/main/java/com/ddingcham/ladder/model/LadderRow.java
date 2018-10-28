@@ -68,14 +68,17 @@ public class LadderRow {
 	}
 	
 	private boolean isMovableToLeft(LadderPosition position){
-		int intPosition = position.toInt();
-		return intPosition > 1 && ladderConnections.get(intPosition-2);
+		return !position.equals(LadderPosition.MIN) && ladderConnections.get(position.toInt()-2);
 	}
 	
 	private boolean isMovableToRight(LadderPosition position){
-		int intPosition = position.toInt();
-		return intPosition <= ladderConnections.size() && ladderConnections.get(intPosition-1);
+		return position.isLeft(maxPosition()) && ladderConnections.get(position.toInt()-1);
 	}
+	
+	private LadderPosition maxPosition(){
+		return new LadderPosition(ladderConnections.size());
+	}
+	
 
 	public boolean direction(LadderPosition position) {
 		// TODO Auto-generated method stub
@@ -84,5 +87,4 @@ public class LadderRow {
 		}
 		return LadderContext.RIGHT;
 	}
-	
 }

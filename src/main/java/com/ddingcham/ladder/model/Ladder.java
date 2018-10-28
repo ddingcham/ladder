@@ -2,11 +2,11 @@ package com.ddingcham.ladder.model;
 
 public class Ladder {
 
-	private Players players;
+	private LadderPlayers players;
 	private LadderRows ladderRows;
 	
-	public Ladder(Players players, int numOfLadderRows){
-		this.players = players;
+	public Ladder(LadderPlayers players, int numOfLadderRows){
+		this.players = new LadderPlayers(players);
 		this.ladderRows = new LadderRows(numOfLadderRows, players.numOfPlayers());
 		calculateResult();
 	}
@@ -17,8 +17,12 @@ public class Ladder {
 		}
 	}
 	
-	public int getResult(String playerName){
+	public LadderPosition getPosition(PlayerName playerName){
 		return players.getPosition(playerName);
+	}
+	
+	public LadderPlayers getAllResult(){
+		return new LadderPlayers(players);
 	}
 
 	@Override

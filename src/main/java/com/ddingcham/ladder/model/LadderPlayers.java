@@ -2,18 +2,23 @@ package com.ddingcham.ladder.model;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class Players {
+public class LadderPlayers {
 	
-	private List<Player> players = new ArrayList<Player>();
+	private List<LadderPlayer> players = new ArrayList<LadderPlayer>();
 	
-	public Players(){}
+	public LadderPlayers() {}
+	
+	public LadderPlayers(LadderPlayers ladderPlayers){
+		Collections.copy(this.players, ladderPlayers.players);
+	}
 
-	public Players(String playerNames){
+	public LadderPlayers(String playerNames){
 		initializePlayers(playerNames);
 	}
-	
+
 	private void initializePlayers(String playerNames) {
 		// TODO Auto-generated method stub
 		for(String playerName : PlayerName.splitPlayerNames(playerNames)){
@@ -22,10 +27,10 @@ public class Players {
 	}
 	
 	public void addPlayer(String playerName){
-		if(players.contains(new Player(playerName))){
+		if(players.contains(new LadderPlayer(playerName))){
 			throw new IllegalArgumentException();
 		}
-		players.add(new Player(playerName, new LadderPosition(numOfPlayers()+1)));
+		players.add(new LadderPlayer(playerName, new LadderPosition(numOfPlayers()+1)));
 	}
 	
 	public int numOfPlayers(){
@@ -35,7 +40,7 @@ public class Players {
 	//TODO 이 부분이 이슈 일듯
 	public void move(LadderRow ladderRow) {
 		// TODO Auto-generated method stub
-		for(Player player : players){
+		for(LadderPlayer player : players){
 			player.move(ladderRow);
 		}
 	}
@@ -59,7 +64,7 @@ public class Players {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		Players other = (Players) obj;
+		LadderPlayers other = (LadderPlayers) obj;
 		if (players == null) {
 			if (other.players != null) {
 				return false;
@@ -70,7 +75,7 @@ public class Players {
 		return true;
 	}
 
-	public int getPosition(PlayerName playerName) {
+	public LadderPosition getPosition(PlayerName playerName) {
 		// TODO Auto-generated method stub
 		return players.get(calculateIndexByPlayerName(playerName)).where();
 	}
